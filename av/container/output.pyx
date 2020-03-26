@@ -19,7 +19,10 @@ cdef close_output(OutputContainer self):
     cdef Stream stream
 
     if self._started and not self._done:
-        self.err_check(lib.av_write_trailer(self.ptr))
+        try:
+            self.err_check(lib.av_write_trailer(self.ptr))
+        except Exception:
+            pass
 
         for stream in self.streams:
             stream.codec_context.close()
