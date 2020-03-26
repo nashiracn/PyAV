@@ -116,12 +116,12 @@ cdef class AudioResampler(object):
                 raise ValueError('Frame does not match AudioResampler setup.')
 
         # Assert that the PTS are what we expect.
-        cdef int64_t expected_pts
-        if frame is not None and frame.ptr.pts != lib.AV_NOPTS_VALUE:
-            expected_pts = <int64_t>(self.pts_per_sample_in * self.samples_in)
-            if frame.ptr.pts != expected_pts:
-                raise ValueError('Input frame pts %d != expected %d; fix or set to None.' % (frame.ptr.pts, expected_pts))
-            self.samples_in += frame.ptr.nb_samples
+        # cdef int64_t expected_pts
+        # if frame is not None and frame.ptr.pts != lib.AV_NOPTS_VALUE:
+        #     expected_pts = <int64_t>(self.pts_per_sample_in * self.samples_in)
+        #     if frame.ptr.pts != expected_pts:
+        #         raise ValueError('Input frame pts %d != expected %d; fix or set to None.' % (frame.ptr.pts, expected_pts))
+        #     self.samples_in += frame.ptr.nb_samples
 
         # The example "loop" as given in the FFmpeg documentation looks like:
         # uint8_t **input;
